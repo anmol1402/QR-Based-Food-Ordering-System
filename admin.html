@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resturant Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- QR Code Library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.4.4/build/qrcode.min.js"></script>
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body class="bg-gray-100">
+    <!--VIEW 1: LOGIN/REGISTER-->
+    <div id="login-view"
+        class="flex items-center justify-center min-h-screen bg-gradient-to-br from-orange-50 to-orange-200 p-4">
+        <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+            <!-- Logo and Title -->
+            <div class="text-center mb-6">
+                <img id="bavarchi-logo-login"
+                    src="https://img.pikbest.com/png-images/20241101/-22modern-chef--26-culinary-logo-pack-22_11044782.png!w700wp"
+                    alt="Logo" class="w-24 h-24 mx-auto rounded-full mb-4 shadow-lg">
+                <h1 class="text-3xl font-bold text-gray-800">Admin Portal</h1>
+                <p class="text-gray-500 text-sm mt-1">Manage your restaurant with ease</p>
+            </div>
+
+            <!-- Tab Buttons -->
+            <div class="flex mb-4 bg-gray-100 p-1 rounded-lg">
+                <button id="login-tab-btn" class="tab-btn active">Login</button>
+                <button id="register-tab-btn" class="tab-btn">Register</button>
+            </div>
+
+            <!-- Error/Success Messages -->
+            <div id="error-message" class="hidden p-3 bg-red-100 text-red-700 rounded-md mb-4 text-sm"></div>
+            <div id="success-message" class="hidden p-3 bg-green-100 text-green-700 rounded-md mb-4 text-sm"></div>
+
+            <!-- Form Container -->
+            <div>
+                <!-- Login Form -->
+                <form id="login-form" class="form-container active">
+                    <div class="relative mb-4">
+                        <label for="login-email" class="absolute left-3.5 top-3 text-gray-400"><i
+                                class="ri-mail-line"></i></label>
+                        <input type="email" id="login-email"
+                            class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            placeholder="you@example.com" required>
+                    </div>
+                    <div class="relative mb-6">
+                        <label for="login-password" class="absolute left-3.5 top-3 text-gray-400"><i
+                                class="ri-lock-line"></i></label>
+                        <input type="password" id="login-password"
+                            class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                            placeholder="••••••••" required>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-orange-500 text-white py-2.5 px-4 rounded-md font-semibold hover:bg-orange-600 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-orange-300">
+                        <i class="ri-login-box-line"></i> Login
+                    </button>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="form-container">
+                    <div class="relative mb-4">
+                        <label for="register-email" class="absolute left-3.5 top-3 text-gray-400"><i
+                                class="ri-mail-line"></i></label>
+                        <input type="email" id="register-email"
+                            class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="you@example.com" required>
+                    </div>
+                    <div class="relative mb-6">
+                        <label for="register-password" class="absolute left-3.5 top-3 text-gray-400"><i
+                                class="ri-lock-line"></i></label>
+                        <input type="password" id="register-password"
+                            class="w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                            placeholder="Min. 6 characters" required>
+                    </div>
+                    <button type="submit"
+                        class="w-full bg-blue-500 text-white py-2.5 px-4 rounded-md font-semibold hover:bg-blue-600 transition-colors flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-300">
+                        <i class="ri-user-add-line"></i> Register
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- =================================== -->
+    <!--     VIEW 2: ADMIN DASHBOARD        -->
+    <!-- =================================== -->
+    <div id="dashboard-view" style="display: none;">
+        <div id="main">
+            <header id="header">
+                <!-- Header: Left Side (Logo) -->
+                <div class="flex items-center gap-4">
+                    <div id="inheader1"><img id="bavarchi"
+                            src="https://img.pikbest.com/png-images/20241101/-22modern-chef--26-culinary-logo-pack-22_11044782.png!w700wp"
+                            alt="Logo"></div>
+                </div>
+
+                <!-- Header: Center (Search Bar) -->
+                <div id="iscontainer"><input id="insearch" placeholder="Search orders, customers..." type="search"><i
+                        id="searchicon" class="ri-search-line"></i></div>
+
+
+                <!-- Header: Right Side (Order Button) -->
+                <div class="flex items-center gap-4">
+                    <div id="inheader4">
+                        <button id="header-order-btn">
+                            <p>Orders</p> <i class="ri-bookmark-fill"></i>
+                            <span id="order-notification-badge">0</span>
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <div id="fakeheader"></div> <!-- Spacer for fixed header -->
+
+            <!-- Toggle Button Container REMOVED -->
+
+            <div id="mid">
+                <nav class="sidebar_menu">
+                    <!-- Toggle Button & Title Inside Sidebar -->
+                    <div class="sidebar-toggle-container">
+                        <span id="sidebar-title">Admin Portal</span> <!-- Title Added Here -->
+                        <button id="menu-toggle-btn"><i class="ri-menu-line"></i></button>
+                    </div>
+                    <div> <!-- Wrapper for menu -->
+                        <!-- Profile Section REMOVED -->
+                        <div class="menu">
+                            <ul>
+                                <li><a id="show-menu-btn" class="active"><i class="ri-restaurant-line"></i> <span
+                                            class="menu-text">My Menu</span></a></li> <!-- Renamed -->
+                                <li><a id="show-customers-btn"><i class="ri-team-line"></i> <span class="menu-text">My
+                                            Customers</span></a></li>
+                                <li><a id="logout-btn"><i class="ri-logout-box-line"></i> <span
+                                            class="menu-text">Logout</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Stats Block REMOVED -->
+                </nav>
+                <main class="main-content">
+                    <!-- Dashboard Views -->
+                    <div id="profile-dashboard-view" class="dashboard-view">
+                        <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 20px;">My Profile</h2>
+                        <div class="profile-container">
+                            <form id="profile-form">
+                                <h3>Portal Details</h3>
+                                <div class="mt-4">
+                                    <label for="profile-restaurant-name">Portal Name (Restaurant Name)</label>
+                                    <input type="text" id="profile-restaurant-name" required>
+                                </div>
+                                <div>
+                                    <label for="profile-email">Login Email</label>
+                                    <input type="email" id="profile-email" disabled>
+                                </div>
+                                <button type="submit" id="profile-save-btn">Save Changes</button>
+                            </form>
+                            <div id="profile-qr-section">
+                                <h3>Your Unique QR Code</h3>
+                                <p class="text-sm text-gray-500">Customers scan this to order.</p>
+                                <canvas id="profile-qr-canvas" width="300" height="300"></canvas>
+                                <p class="text-sm text-gray-500">Your Unique URL:</p>
+                                <b id="profile-customer-url"></b>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="menu-dashboard-view" class="dashboard-view active">
+                        <button id="add-dish-btn"
+                            style="background-color: #1e7835; color: white; border: none; border-radius: 8px; padding: 12px 20px; font-size: 1rem; cursor: pointer; display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+                            <i class="ri-add-fill"></i> Add New Dish
+                        </button>
+                        <div id="food">
+                            <div class="bigbox" id="food-container"></div>
+                        </div>
+                    </div>
+
+                    <div id="orders-dashboard-view" class="dashboard-view">
+                        <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 20px;">All Orders</h2>
+                        <div class="flex mb-4 border-b bg-white rounded-t-lg shadow-sm">
+                            <button id="pending-orders-tab" class="tab-btn active">Pending</button>
+                            <button id="completed-orders-tab" class="tab-btn">Completed</button>
+                        </div>
+                        <div id="pending-orders-container" class="order-list-container active">
+                            <div id="orders-container-pending"></div>
+                        </div>
+                        <div id="completed-orders-container" class="order-list-container">
+                            <div id="orders-container-completed"></div>
+                        </div>
+                    </div>
+
+                    <div id="customers-dashboard-view" class="dashboard-view">
+                        <h2 style="font-size: 1.8rem; font-weight: 600; margin-bottom: 20px;">My Customers</h2>
+                        <table id="customers-table">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Phone Number</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-list-container"></tbody>
+                        </table>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dish Modal (for Add & Edit) -->
+    <div id="dish-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" id="close-dish-modal">&times;</span>
+            <h2 id="dish-modal-title">Add a New Dish</h2>
+            <form id="dish-form">
+                <div><label for="dish-name">Dish Name:</label><input type="text" id="dish-name" required></div>
+                <div><label for="dish-price">Price:</label><input type="number" id="dish-price" required></div>
+                <div><label for="dish-image">Image URL:</label><input type="url" id="dish-image"
+                        placeholder="https://..." required></div>
+                <div>
+                    <label for="dish-quantity">Available Quantity:</label>
+                    <input type="number" id="dish-quantity" min="-1" value="-1"
+                        style="width: 100%; padding: 8px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;"
+                        required>
+                    <small style="font-size: 0.8rem; color: #555;">Enter -1 for unlimited quantity.</small>
+                </div>
+                <button type="submit" id="dish-form-submit-btn">Add Dish</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- QR CODE MODAL REMOVED -->
+
+
+    <!-- =================================== -->
+    <!--     FIREBASE & JAVASCRIPT         -->
+    <!-- =================================== -->
+    <!-- Link to external JavaScript file -->
+    <script type="module" src="admin.js"></script>
+
+</body>
+
+</html>
